@@ -17,7 +17,7 @@ const userCvv = document.getElementById("cvv")
 const userExpMonth = document.getElementById("exp-month")
 const userExpYear = document.getElementById("exp-year")
 
-
+console.log(userName)
 
  /**
   *
@@ -79,7 +79,7 @@ function isValidUserCvv(cvv){
     };
   }
 
-console.log(userName)
+
 //userName.addEventListener("input", createListener(isValidUserName));
 //
 // userEmail.addEventListener("input", createListener(isValidUserEmail));
