@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () =>{
-
+  const form = document.querySelector("form");
   //User information
   const userNameInput = document.getElementById("name");
+  userNameInput.focus();
   const userEmail = document.getElementById("mail")
   const userTitle = document.getElementById("title")
   //T-shirt information
@@ -21,109 +22,109 @@ document.addEventListener('DOMContentLoaded', () =>{
 
   const submitButton = document.querySelector('button');
 
-
-
-
    /**
     *
     * VALIDATION
     *
     */
 
-
-  // //Can only contain uppercase and lowercase letters and spaces.
-  // function isValidUserName(name){
-  //   return /^[a-zA-Z]+$/.test(name);
-  // }
-  //must contain a lowercase, an uppercase, and a number.
-  function isValidEmail(email){
-    return /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
-// [a-zA-Z0-9]+\@\w+\.[org, com, net]+
-//     mary@gmail.com
-//     dk43@junl
-//     jfdkKA34@gmal.com
-//     jfdkal jfdka @ cmail.com
-//     A423a@mail.org
-//     fjkdaJKL453@anywhere.net
-//     Netmary43@home.org
-
-
-  }
-  // //Credit Card number must be between 13 and 16 digits.
-  function isValidUserCCNum(cc_num){
-    let check = /\d{13}/.test(cc_num);
-    alert(check)
-    return check;
-  }
-  //Zipcode must be 5 digits.
-  function isValidUserZip(Zip){
-    return /\d{5}/.test(Zip);
-  }
-  //CVV must be 3 digits.
-  function isValidUserCvv(Cvv){
-    return /\d{3}/.test(Cvv);
-  }
-
-
-
-
-  /**
-   *
-   * VALIDATION
-   *
-   */
-
    function validator(){
-     const userName = userNameInput.value;
+     const fullName = userNameInput.value;
      const email = userEmail.value;
      const ccNum = userCCNum.value;
      const Zip = userZip.value;
      const Cvv = userCvv.value;
 
-     if(userName === ''){
-       console.log(userName)
-       const ttname = document.getElementById('ttname').style.display = "block";
-     }
+     function isValidUserfullName(){
+       //no blanks
+        if(fullName){
+          //console.log(fullName+ " name: TRUE needs work")
+          const ttname = document.getElementById('ttname').style.display = "none";
+        }else{
+          //console.log(fullName+ " name: FALSE needs work?")
+          const ttname = document.getElementById('ttname').style.display = "block";
+        }
+      }
 
-     if(isValidEmail){//returns true of false;
-      console.log(email+ " needs work");
-       const ttemail = document.getElementById('ttemail').style.display = "block";
-     }else{
-       const ttemail = document.getElementById('ttemail').style.display = "none";
-     }
+     function isValidUseremail(){
+       testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
+        if(testemail){
+          //console.log(email+ " email: TRUE needs work")
+          const ttemail = document.getElementById('ttemail').style.display = "none";
+        }else{
+          //console.log(email+ " email: FALSE needs work?")
+          const ttemail = document.getElementById('ttemail').style.display = "block";
+        }
+      }
 
-     if(isValidUserCCNum){
-       console.log(ccNum+ " needs work")
-       const ttccNum = document.getElementById('ttccNum').style.display = "block";
-     }else{
-       const ttccNum = document.getElementById('ttccNum').style.display = "none";
-     }
+     function isValidUserccNum(){
+       testccNum = /^\d{13,16}$/.test(ccNum);
+        if(testccNum){
+          //console.log(ccNum+ " ccNum: TRUE needs work")
+          const ttccNum = document.getElementById('ttccNum').style.display = "none";
+        }else{
+          //console.log(ccNum+ " ccNum: FALSE needs work?")
+          const ttccNum = document.getElementById('ttccNum').style.display = "block";
+        }
+      }
 
-     if(isValidUserZip){
-       console.log(isValidUserZip+ " needs work")
-       const ttZip = document.getElementById('ttZip').style.display = "block";
-     }else{
-       const ttZip = document.getElementById('ttZip').style.display = "none";
-     }
+     function isValidUserZip(){
+       testZip = /^\d{5}$/.test(Zip);
+        if(testZip){
+          //console.log(Zip+ " Zip: TRUE needs work")
+          const ttZip = document.getElementById('ttZip').style.display = "none";
+        }else{
+          //console.log(Zip+ " Zip: FALSE needs work?")
+          const ttZip = document.getElementById('ttZip').style.display = "block";
+        }
+      }
 
-     if(isValidUserCvv){
-       console.log(Cvv+ "TRUE needs work")
-       const ttCvv = document.getElementById('ttCvv').style.display = "none";
-     }else{
-       console.log(Cvv+ "FALSE needs work?")
-       const ttCvv = document.getElementById('ttCvv').style.display = "block";
-     }
+     function isValidUserCvv(){
+       testCvv = /^\d{3}$/.test(Cvv);
+        if(testCvv){
+          //console.log(Cvv+ " Cvv: TRUE needs work")
+          const ttCvv = document.getElementById('ttCvv').style.display = "none";
+        }else{
+          //console.log(Cvv+ " Cvv: FALSE needs work?")
+          const ttCvv = document.getElementById('ttCvv').style.display = "block";
+        }
+      }
+      isValidUserCvv()
+      isValidUserZip()
+      isValidUserccNum()
+      isValidUseremail()
+      isValidUserfullName()
 
    }
 
+   //CVV ERROR HANDLER
+   // function cvvError(){
+   //   const cvvRegex = (/^\d{1,5}$/);
+   //   let cvvResult = false;
+   //   if (cvvRegex.test(cvv.value)) {
+   //         cvvResult = true;
+   //   } else {
+   //     cvvResult = false;
+   //   }
+   //   if (cvvResult == true){
+   //     cvv.style.borderColor = "green";
+   //     totalCorrect += 1;
+   //   } else if (cvvResult == false){
+   //     cvv.style.borderColor = "red";
+   //   };
+   // }
 
 
 
 
 
-
-   submitButton.addEventListener('click', (e) =>{
-     e.preventDefault();
+  form.addEventListener('submit', (e) =>{
+     e.preventDefault(userNameInput);
+     e.preventDefault(userEmail);
+     e.preventDefault(userCCNum);
+     e.preventDefault(userZip);
+     e.preventDefault(userCvv);
+     //cvvError()
      validator();
    });
 
@@ -167,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () =>{
   //
   // userZip.addEventListener("input", createListener(isValidUserZip));
   //
-  // userCvv.addEventListener("input", createListener(isValidUserCvv));
+  //userCvv.addEventListener("input", createListener(isValidUserCvv));
 
 
   /**
