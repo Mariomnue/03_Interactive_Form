@@ -15,17 +15,17 @@
       <h1>Full Stack Conf</h1>
     </header>
 
-    <form action="#" method="post" novalidate>
+    <form action="index.html" method="post" novalidate>
 
       <fieldset>
         <legend>Basic Info</legend>
 
         <label for="name">Name:</label>
-        <span class="tooltip">Can only contain uppercase and lowercase letters and spaces</span>
-        <input type="text" id="name" name="user-name">
+        <span class="tooltip" id='ttname'>Please enter a name. Can only contain uppercase and lowercase letters and spaces</span>
+        <input type="text" id="name" name="name">
 
         <label for="mail">Email:</label>
-        <span class="tooltip">Must contain one lowercase, one uppercase, and one number</span>
+        <span class="tooltip" id='ttemail'>Must be a valid email</span>
         <input type="email" id="mail" name="user-email">
 
 
@@ -123,21 +123,21 @@
 
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
-            <span class="tooltip">Must be between 13 and 16 numbers</span>
+            <span id="ttccNum" class="tooltip">Must be between 13 and 16 numbers</span>
         	  <input id="cc-num" name="user-cc-num" type="text">
 
           </div>
 
           <div class="col-3 col">
             <label for="zip">Zip Code:</label>
-            <span class="tooltip">Must be 5 numbers</span>
+            <span id="ttZip" class="tooltip">Must be 5 numbers</span>
             <input id="zip" name="user-zip" type="text">
 
           </div>
 
           <div class="col-3 col">
             <label for="cvv">CVV:</label>
-            <span class="tooltip">Must be 3 numbers</span>
+            <span id="ttCvv" class="tooltip">Must be 3 numbers</span>
             <input id="cvv" name="user-cvv" type="text">
 
           </div>
