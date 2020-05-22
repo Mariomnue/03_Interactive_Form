@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () =>{
   const userNameInput = document.getElementById("name");
   userNameInput.focus();
   const userEmail = document.getElementById("mail")
-  const userTitle = document.getElementById("title")
+  const userTitle = document.getElementById("title")//Job roll
+//  userTitle.value =
   //T-shirt information
   const userSize = document.getElementById("size")
   const userDesign = document.getElementById("design")
@@ -21,6 +22,84 @@ document.addEventListener('DOMContentLoaded', () =>{
   const userExpYear = document.getElementById("exp-year")
 
   const submitButton = document.querySelector('button');
+
+
+  /**
+   *
+   * Job Roll
+   *
+   */
+//userTitle
+
+  function setUserTitle(){
+    if(userTitle.value != 'other'){
+
+
+    }
+  }
+
+//Make the other-title field only appear when other is selected
+let otherTitle = document.getElementById("other-title").style.display = "none";
+otherTitle.placeholder = "Your Job Roll";
+
+   function validTitle(){
+     if(userTitle.value === 'other'){
+       document.getElementById("other-title").style.display = "block";
+       otherTitle.text = "Your Job Roll";
+       console.log("otherTitle: " +otherTitle+ "  NEEDS more work");
+     }
+console.log(userTitle.value)
+   }
+
+
+  userTitle.addEventListener("click", (e) =>{
+      // if(userTitle.value === 'other'){
+      //   document.getElementById("other-title").style.display = "block";
+      //   otherTitle.value = "Your Job Roll";
+      //   console.log("otherTitle: " +otherTitle.value+ "  NEEDS more work");
+      // }
+      validTitle();
+ console.log(userTitle.value)
+
+  });
+
+
+
+
+  /**
+   *
+   * T-Shirt Info
+   *
+   */
+
+   /**
+   *  start off with the color selector set to "Please select a T-shirt theme"
+   */
+   colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
+   colorControl.text = "Please select a T-shirt theme";
+   userColor[0].selected = true;
+//   console.log( userColor[0].selected);
+
+
+// userDesign
+// userSize
+// userColor
+   userDesign.addEventListener('click', (e) =>{
+     const selected = userDesign.value
+
+//console.log(userDesign.value)
+
+     if('Theme - JS Puns'){
+//colors available are Cornflower Blue & Dark Slate Grey
+        
+console.log('puns: ' +userDesign.value)
+     }else if('Theme - I &#9829; JS'){
+//colors available are Gold, tomato, Steel Blue, Dim Gray
+
+console.log('heart: ' +userDesign.value)
+     }
+   })
+
 
    /**
     *
@@ -45,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           const ttname = document.getElementById('ttname').style.display = "block";
         }
       }
-
+      //must be a valid email
      function isValidUseremail(){
        testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
         if(testemail){
@@ -56,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           const ttemail = document.getElementById('ttemail').style.display = "block";
         }
       }
-
+      //must be 13 to 16 digits
      function isValidUserccNum(){
        testccNum = /^\d{13,16}$/.test(ccNum);
         if(testccNum){
@@ -67,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           const ttccNum = document.getElementById('ttccNum').style.display = "block";
         }
       }
-
+      //must be 5 digits
      function isValidUserZip(){
        testZip = /^\d{5}$/.test(Zip);
         if(testZip){
@@ -78,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           const ttZip = document.getElementById('ttZip').style.display = "block";
         }
       }
-
+      //must be 3 digits
      function isValidUserCvv(){
        testCvv = /^\d{3}$/.test(Cvv);
         if(testCvv){
@@ -97,78 +176,15 @@ document.addEventListener('DOMContentLoaded', () =>{
 
    }
 
-   //CVV ERROR HANDLER
-   // function cvvError(){
-   //   const cvvRegex = (/^\d{1,5}$/);
-   //   let cvvResult = false;
-   //   if (cvvRegex.test(cvv.value)) {
-   //         cvvResult = true;
-   //   } else {
-   //     cvvResult = false;
-   //   }
-   //   if (cvvResult == true){
-   //     cvv.style.borderColor = "green";
-   //     totalCorrect += 1;
-   //   } else if (cvvResult == false){
-   //     cvv.style.borderColor = "red";
-   //   };
-   // }
-
-
-
-
-
   form.addEventListener('submit', (e) =>{
      e.preventDefault(userNameInput);
      e.preventDefault(userEmail);
      e.preventDefault(userCCNum);
      e.preventDefault(userZip);
      e.preventDefault(userCvv);
-     //cvvError()
      validator();
    });
 
-
-
-
-
-
-  /**
-   *
-   * SET UP EVENTS ///This section has been borrowed from Treehouse course, unit 3, Regular Expressions in JavaScript.
-   *
-   */
-
-
-    // function showOrHideTip(show, element) {
-    //   // show element when show is true, hide when false
-    //   if (show) {
-    //     element.style.display = "inherit";
-    //   } else {
-    //     element.style.display = "none";
-    //   }
-    // }
-    //
-    // function createListener(validator) {
-    //   return e => {
-    //     const text = e.target.value;
-    //     const valid = validator(text);
-    //     const showTip = text !== "" && !valid;
-    //     const tooltip = e.target.nextElementSibling;
-    //     showOrHideTip(showTip, tooltip);
-    //   };
-    // }
-
-
-  //userName.addEventListener("input", createListener(isValidUserName));
-  //
-  // userEmail.addEventListener("input", createListener(isValidUserEmail));
-  //
-  // userCCNum.addEventListener("input", createListener(isValidUserCCNum));
-  //
-  // userZip.addEventListener("input", createListener(isValidUserZip));
-  //
-  //userCvv.addEventListener("input", createListener(isValidUserCvv));
 
 
   /**
