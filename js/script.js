@@ -48,7 +48,7 @@ otherTitle.placeholder = "Your Job Roll";
        otherTitle.text = "Your Job Roll";
        console.log("otherTitle: " +otherTitle+ "  NEEDS more work");
      }
-console.log(userTitle.value)
+//console.log(userTitle.value)
    }
 
 
@@ -59,7 +59,7 @@ console.log(userTitle.value)
       //   console.log("otherTitle: " +otherTitle.value+ "  NEEDS more work");
       // }
       validTitle();
- console.log(userTitle.value)
+ //console.log(userTitle.value)
 
   });
 
@@ -73,32 +73,64 @@ console.log(userTitle.value)
    */
 
    /**
-   *  start off with the color selector set to "Please select a T-shirt theme"
+   *
+   * set the color selector set to "Please select a T-shirt theme"
    */
-   colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
-   colorControl.text = "Please select a T-shirt theme";
-   userColor[0].selected = true;
-//   console.log( userColor[0].selected);
+   // userDesign
+   // userSize
+   // userColor
+  function colorInit(){
+    //create the dead color selector, give it a value, then select it.
+       colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
+       colorControl.text = "Please select a T-shirt theme";
+       userColor[0].selected = true;
+    //hide all the colors until design has been selected.
+      for(let i=0; i<userColor.length; i++){
+        userColor[i].hidden = true;
+      }
+  }
+  colorInit();//run the init;
 
+  function colorReset(){
+    userColor[0].selected = true;
+    for(let i=0; i<userColor.length; i++){
+     userColor[i].hidden = true;
+    }
+  }
 
-// userDesign
-// userSize
-// userColor
+//select a design to release the color options for that shirt.
    userDesign.addEventListener('click', (e) =>{
-     const selected = userDesign.value
 
-//console.log(userDesign.value)
-
-     if('Theme - JS Puns'){
-//colors available are Cornflower Blue & Dark Slate Grey
-        
-console.log('puns: ' +userDesign.value)
-     }else if('Theme - I &#9829; JS'){
-//colors available are Gold, tomato, Steel Blue, Dim Gray
-
-console.log('heart: ' +userDesign.value)
+     if(userDesign[0].selected){
+       colorReset();
+     }
+     if(userDesign[1].selected){
+       //colors available are cornflowerblue, darkslategrey
+        userColor[0].hidden = true;//'Please select t-shirt theme'
+        userColor[1].hidden = false;//cornflowerblue
+        userColor[2].hidden = false;//darkslategrey
+        userColor[3].hidden = true;//gold
+        userColor[4].hidden = true;//tomato
+        userColor[5].hidden = true;//steelblue
+        userColor[6].hidden = true;//dim grey
+        userColor[1].selected = true;
+//console.log('puns: ' +userDesign.value)
+      }else if(userDesign[2].selected){
+      //colors available are Gold, tomato, Steel Blue, Dim Gray
+        userColor[0].hidden = true;
+        userColor[1].hidden = true;
+        userColor[2].hidden = true;
+        userColor[3].hidden = false;
+        userColor[4].hidden = false;
+        userColor[5].hidden = false;
+        userColor[6].hidden = false;
+        userColor[3].selected = true;
      }
    })
+
+
+
+
 
 
    /**
