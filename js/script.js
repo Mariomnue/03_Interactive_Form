@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
   /**
    *
-   * Job Roll
+   * Job Roll  needs work
    *
    */
 //userTitle
@@ -62,6 +62,39 @@ otherTitle.placeholder = "Your Job Roll";
  //console.log(userTitle.value)
 
   });
+
+
+
+  /**
+   *
+   * Activities
+   *
+   */
+//do not allow selection of duplicate times;
+   const checkboxes = document.querySelectorAll('.activities input');
+    document.querySelector('.activities').addEventListener('change', (e) => {
+      const clicked = e.target;
+      const clickedType = clicked.getAttribute('data-day-and-time');
+      for(let i=0; i<checkboxes.length; i++){
+        let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
+        if(clickedType === themAttr && clicked !== checkboxes[i]){
+          if(clicked.checked){
+            checkboxes[i].disabled = true;
+          }else{
+            checkboxes[i].disabled = false;
+          }
+        }
+      }
+    })
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,14 +161,9 @@ otherTitle.placeholder = "Your Job Roll";
      }
    })
 
-
-
-
-
-
    /**
     *
-    * VALIDATION
+    * VALIDATION - text fields
     *
     */
 
