@@ -197,7 +197,7 @@ paymentInfoReset()//init the payment information section
     //         document.querySelector('#cvv-error').style.display = 'none';
     //     };
 
-
+//////////    START HERE  /////////////////
 
    function validator(){
      const fullName = userNameInput.value;
@@ -280,18 +280,10 @@ paymentInfoReset()//init the payment information section
 //  console.log('userNameInput: '+userNameInput.value+ " userEmail: " +userEmail.value+ " userTitle: " +userTitle.value);
    });
 
-//    function validatorAll(){
-//      errorField = document.getElementsByClassName('container');
-//      errorContainer = document.createElement('div');
-//      errorSpan = document.createElement('span');
-//      errorField.insertBefore(errorSpan, errorField.firstElementChild);
-//
-//      errorSpan.innerHTML = '<p>"Form requires more information"</p>';
-//      //errorSpan = "hey";
-// console.log(errorSpan.innerHTML)
-//      //errorField.appendChild('errorText');
-//      //errorText.innerHTML = "hey your missing something"
-//    }
+
+
+
+
 
 
   /**
