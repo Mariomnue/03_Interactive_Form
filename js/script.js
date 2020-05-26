@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () =>{
   userNameInput.focus();
   const userEmail = document.getElementById("mail")
   const userTitle = document.getElementById("title")//Job roll
-//  userTitle.value =
+
   //T-shirt information
   const userSize = document.getElementById("size")
   const userDesign = document.getElementById("design")
@@ -29,74 +29,33 @@ document.addEventListener('DOMContentLoaded', () =>{
    * Job Roll  needs work
    *
    */
-//userTitle
-
-  function setUserTitle(){
-    if(userTitle.value != 'other'){
-
-
-    }
-  }
-
-//Make the other-title field only appear when other is selected
-let otherTitle = document.getElementById("other-title").style.display = "none";
-otherTitle.placeholder = "Your Job Roll";
-
-   function validTitle(){
-     if(userTitle.value === 'other'){
-       document.getElementById("other-title").style.display = "block";
-       otherTitle.text = "Your Job Roll";
-       console.log("otherTitle: " +otherTitle+ "  NEEDS more work");
-     }
-//console.log(userTitle.value)
-   }
-
-
-  userTitle.addEventListener("click", (e) =>{
-      // if(userTitle.value === 'other'){
-      //   document.getElementById("other-title").style.display = "block";
-      //   otherTitle.value = "Your Job Roll";
-      //   console.log("otherTitle: " +otherTitle.value+ "  NEEDS more work");
-      // }
-      validTitle();
- //console.log(userTitle.value)
-
-  });
-
-
-
-  /**
-   *
-   * Activities
-   *
-   */
-//do not allow selection of duplicate times;
-   const checkboxes = document.querySelectorAll('.activities input');
-    document.querySelector('.activities').addEventListener('change', (e) => {
-      const clicked = e.target;
-      const clickedType = clicked.getAttribute('data-day-and-time');
-      for(let i=0; i<checkboxes.length; i++){
-        let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
-        if(clickedType === themAttr && clicked !== checkboxes[i]){
-          if(clicked.checked){
-            checkboxes[i].disabled = true;
-          }else{
-            checkboxes[i].disabled = false;
-          }
+  //userTitle
+  //Make the other-title field only appear when other is selected
+  const otherTitle = document.getElementById("other-title")
+  document.getElementById("other-title").style.display = "none";
+      function setOtherTitle(){
+        if(userTitle.value != 'other'){
+          document.getElementById("other-title").style.display = "none";
         }
       }
-    })
 
+      function turnOnOtherTitle(){
+      setOtherTitle();//reset the optional title
+        if(userTitle.value === 'other'){
+           document.getElementById("other-title").style.display = "block";
+           otherTitle.focus();
+        }
+       }
 
+    userTitle.addEventListener("click", (e) =>{
+        turnOnOtherTitle();
+        if(userTitle.value === "other"){
+          return otherTitle.value;
+        }else{
+          return userTitle.value;
+        }
 
-
-
-
-
-
-
-
-
+    });
 
 
   /**
@@ -105,13 +64,7 @@ otherTitle.placeholder = "Your Job Roll";
    *
    */
 
-   /**
-   *
-   * set the color selector set to "Please select a T-shirt theme"
-   */
-   // userDesign
-   // userSize
-   // userColor
+///set the color selector to "Please select a T-shirt theme"
   function colorInit(){
     //create the dead color selector, give it a value, then select it.
        colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
@@ -138,28 +91,98 @@ otherTitle.placeholder = "Your Job Roll";
        colorReset();
      }
      if(userDesign[1].selected){
-       //colors available are cornflowerblue, darkslategrey
+       //colors available are cornflowerblue, darkslategrey, Gold
         userColor[0].hidden = true;//'Please select t-shirt theme'
         userColor[1].hidden = false;//cornflowerblue
         userColor[2].hidden = false;//darkslategrey
-        userColor[3].hidden = true;//gold
+        userColor[3].hidden = false;//gold
         userColor[4].hidden = true;//tomato
         userColor[5].hidden = true;//steelblue
         userColor[6].hidden = true;//dim grey
         userColor[1].selected = true;
 //console.log('puns: ' +userDesign.value)
       }else if(userDesign[2].selected){
-      //colors available are Gold, tomato, Steel Blue, Dim Gray
+      //colors available are tomato, Steel Blue, Dim Gray
         userColor[0].hidden = true;
         userColor[1].hidden = true;
         userColor[2].hidden = true;
-        userColor[3].hidden = false;
+        userColor[3].hidden = true;
         userColor[4].hidden = false;
         userColor[5].hidden = false;
         userColor[6].hidden = false;
-        userColor[3].selected = true;
+        userColor[4].selected = true;
      }
-   })
+   });
+
+     /**
+      *
+      * Activities
+      *
+      */
+//let otherTitle = document.getElementById("other-title").style.display = "none";
+//otherTitle.placeholder = "Your Job Roll";
+
+   //do not allow selection of duplicate times;
+      const checkboxes = document.querySelectorAll('.activities input');
+      let total = 0;
+
+      let runningTotal = document.getElementById("totalCost").style.display = "block";
+      runningTotal.value = "Total: "
+console.log("runningTotal: " +total+ " needs more work");
+
+
+       document.querySelector('.activities').addEventListener('change', (e) => {
+         const clicked = e.target;
+         const clickedType = clicked.getAttribute('data-day-and-time');
+           total = 0;
+           for(let j=0; j<checkboxes.length; j++){
+             if(checkboxes[j].checked){
+              total += parseInt(checkboxes[j].getAttribute('data-cost'));
+             }
+           }
+console.log("total: " + total);
+//console.log(checkboxes[2].text)
+         for(let i=0; i<checkboxes.length; i++){
+           let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
+           if(clickedType === themAttr && clicked !== checkboxes[i]){
+             if(clicked.checked){
+               checkboxes[i].disabled = true;
+             }else{
+               checkboxes[i].disabled = false;
+             }
+           }
+         }
+       })
+
+
+
+   /**
+    *
+    * Payment Info
+    *
+    */
+//select one payment method, display appropriate section
+function paymentInfoReset(){
+    document.getElementById('credit-card').style.display = "none";
+    document.getElementById('paypal').style.display = "none";
+    document.getElementById('bitcoin').style.display = "none";
+  }
+paymentInfoReset()//init the payment information section
+
+    userPayment.addEventListener('click', (e) =>{
+    if(userPayment.value === 'credit card'){
+      paymentInfoReset();
+      document.getElementById('credit-card').style.display = "block";
+    }else if(userPayment.value === 'paypal'){
+      paymentInfoReset();
+      document.getElementById('paypal').style.display = "block";
+    }else if(userPayment.value === 'bitcoin'){
+      paymentInfoReset()
+      document.getElementById('bitcoin').style.display = "block";
+    }
+  });
+
+
 
    /**
     *
@@ -167,10 +190,19 @@ otherTitle.placeholder = "Your Job Roll";
     *
     */
 
+    // if (!cvvIsValid && creditPayment) {
+    //         console.log('invalid cvv');
+    //         document.querySelector('#cvv-error').style.display = 'inherit';
+    //     } else {
+    //         document.querySelector('#cvv-error').style.display = 'none';
+    //     };
+
+
+
    function validator(){
      const fullName = userNameInput.value;
      const email = userEmail.value;
-     const ccNum = userCCNum.value;
+     //const ccNum = userCCNum.value;
      const Zip = userZip.value;
      const Cvv = userCvv.value;
 
@@ -193,10 +225,12 @@ otherTitle.placeholder = "Your Job Roll";
         }else{
           //console.log(email+ " email: FALSE needs work?")
           const ttemail = document.getElementById('ttemail').style.display = "block";
+
         }
       }
       //must be 13 to 16 digits
      function isValidUserccNum(){
+       const ccNum = userCCNum.value;
        testccNum = /^\d{13,16}$/.test(ccNum);
         if(testccNum){
           //console.log(ccNum+ " ccNum: TRUE needs work")
@@ -228,12 +262,11 @@ otherTitle.placeholder = "Your Job Roll";
           const ttCvv = document.getElementById('ttCvv').style.display = "block";
         }
       }
-      isValidUserCvv()
-      isValidUserZip()
-      isValidUserccNum()
-      isValidUseremail()
       isValidUserfullName()
-
+      isValidUseremail()
+      isValidUserccNum()
+      isValidUserZip()
+      isValidUserCvv()
    }
 
   form.addEventListener('submit', (e) =>{
@@ -243,8 +276,22 @@ otherTitle.placeholder = "Your Job Roll";
      e.preventDefault(userZip);
      e.preventDefault(userCvv);
      validator();
+     //validatorAll();
+//  console.log('userNameInput: '+userNameInput.value+ " userEmail: " +userEmail.value+ " userTitle: " +userTitle.value);
    });
 
+//    function validatorAll(){
+//      errorField = document.getElementsByClassName('container');
+//      errorContainer = document.createElement('div');
+//      errorSpan = document.createElement('span');
+//      errorField.insertBefore(errorSpan, errorField.firstElementChild);
+//
+//      errorSpan.innerHTML = '<p>"Form requires more information"</p>';
+//      //errorSpan = "hey";
+// console.log(errorSpan.innerHTML)
+//      //errorField.appendChild('errorText');
+//      //errorText.innerHTML = "hey your missing something"
+//    }
 
 
   /**
