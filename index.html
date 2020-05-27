@@ -65,8 +65,8 @@
             </select>
           </div>
 
-          <div id="colors-js-puns" class="">
-            <label for="color">Color:</label>
+          <div id="colors-js-puns" class="tShirtColor">
+            <label for="color" id="tShirtColor">Color:</label>
             <select id="color">
               <option value="cornflowerblue">Cornflower Blue (JS Puns shirt only)</option>
               <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option>
@@ -84,19 +84,19 @@
           <label>
             <input type="checkbox" name="all" data-cost="200"> Main Conference — $200
           </label>
-          <label>
+          <label id="js-frameworks" for="js-frameworks">
             <input type="checkbox" name="js-frameworks" data-day-and-time="Tuesday 9am-12pm" data-cost="100">
             JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100
           </label>
-          <label>
+          <label id="js-libs" for="js-libs">
             <input type="checkbox" name="js-libs" data-day-and-time="Tuesday 1pm-4pm" data-cost="100">
             JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100
           </label>
-          <label>
+          <label id="express" for="express">
             <input type="checkbox" name="express" data-day-and-time="Tuesday 9am-12pm" data-cost="100">
             Express Workshop — Tuesday 9am-12pm, $100
           </label>
-          <label>
+          <label id="node" for="node">
             <input type="checkbox" name="node" data-day-and-time="Tuesday 1pm-4pm" data-cost="100">
             Node.js Workshop — Tuesday 1pm-4pm, $100
           </label>
@@ -209,6 +209,11 @@
         <p id="cvv-error" class="errorBox">
           There is an error in the "CVV:" field:<br>
           <span>Please use 3 numbers!</span>
+        </p>
+        <p id="register" class="errorBox">
+          Thank you for registering for the Full Stack Conference<br>
+          <span>Your tickets will be emailed to the address you provided.<br>
+            Enjoy the Full Stack Conference!</span>
         </p>
       </div>
 
