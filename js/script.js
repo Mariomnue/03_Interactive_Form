@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
   const userNameInput = document.getElementById("name");
   userNameInput.focus();
   const userEmail = document.getElementById("mail")
-  const userTitle = document.getElementById("title")//Job roll
+  let userTitle = document.getElementById("title")//Job roll
 
   //T-shirt information
   const userSize = document.getElementById("size")
@@ -29,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () =>{
    * Job Roll  needs work
    *
    */
+
+/////5-26-2020 set user titleError
+
+
+
+
   //userTitle
   //Make the other-title field only appear when other is selected
   const otherTitle = document.getElementById("other-title")
@@ -56,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
 
     });
+    userTitle.addEventListener("blur", (e) =>{
+      userTitle.value = otherTitle.value;
+console.log(userTitle.value)
+      return userTitle;
+    })
 
 
   /**
@@ -199,10 +210,21 @@ paymentInfoReset()//init the payment information section
 
 //////////    START HERE  /////////////////
 
+  const userError = document.querySelector('#user-error').style.display = 'none';
+  const emailError = document.querySelector('#email-error').style.display = 'none';
+  const titleError = document.querySelector('#title-error').style.display = 'none';
+  const activitiesError = document.querySelector('#activities-error').style.display = 'none';
+  const paymentError = document.querySelector('#payment-error').style.display = 'none';
+  const cardError = document.querySelector('#card-error').style.display = 'none';
+  const zipError = document.querySelector('#zip-error').style.display = 'none';
+  const cvvError = document.querySelector('#cvv-error').style.display = 'none';
+
+//console.log('userError: ' +userError+ " " +cvvError);
+
    function validator(){
      const fullName = userNameInput.value;
      const email = userEmail.value;
-     //const ccNum = userCCNum.value;
+     const ccNum = userCCNum.value;
      const Zip = userZip.value;
      const Cvv = userCvv.value;
 
@@ -211,9 +233,12 @@ paymentInfoReset()//init the payment information section
         if(fullName){
           //console.log(fullName+ " name: TRUE needs work")
           const ttname = document.getElementById('ttname').style.display = "none";
+          document.querySelector('#user-error').style.display = "none";
+
         }else{
-          //console.log(fullName+ " name: FALSE needs work?")
+          console.log(userError+ " name: FALSE needs work?")
           const ttname = document.getElementById('ttname').style.display = "block";
+          document.querySelector('#user-error').style.display = "block";
         }
       }
       //must be a valid email
@@ -222,9 +247,11 @@ paymentInfoReset()//init the payment information section
         if(testemail){
           //console.log(email+ " email: TRUE needs work")
           const ttemail = document.getElementById('ttemail').style.display = "none";
+          document.querySelector('#email-error').style.display = 'none';
         }else{
           //console.log(email+ " email: FALSE needs work?")
           const ttemail = document.getElementById('ttemail').style.display = "block";
+          document.querySelector('#email-error').style.display = 'block';
 
         }
       }
@@ -235,9 +262,11 @@ paymentInfoReset()//init the payment information section
         if(testccNum){
           //console.log(ccNum+ " ccNum: TRUE needs work")
           const ttccNum = document.getElementById('ttccNum').style.display = "none";
+          document.querySelector('#card-error').style.display = 'none';
         }else{
           //console.log(ccNum+ " ccNum: FALSE needs work?")
           const ttccNum = document.getElementById('ttccNum').style.display = "block";
+          document.querySelector('#card-error').style.display = 'block';
         }
       }
       //must be 5 digits
@@ -246,9 +275,11 @@ paymentInfoReset()//init the payment information section
         if(testZip){
           //console.log(Zip+ " Zip: TRUE needs work")
           const ttZip = document.getElementById('ttZip').style.display = "none";
+          document.querySelector('#zip-error').style.display = 'none';
         }else{
           //console.log(Zip+ " Zip: FALSE needs work?")
           const ttZip = document.getElementById('ttZip').style.display = "block";
+          document.querySelector('#zip-error').style.display = 'block';
         }
       }
       //must be 3 digits
@@ -257,13 +288,16 @@ paymentInfoReset()//init the payment information section
         if(testCvv){
           //console.log(Cvv+ " Cvv: TRUE needs work")
           const ttCvv = document.getElementById('ttCvv').style.display = "none";
+          document.querySelector('#cvv-error').style.display = 'none';
         }else{
           //console.log(Cvv+ " Cvv: FALSE needs work?")
           const ttCvv = document.getElementById('ttCvv').style.display = "block";
+          document.querySelector('#cvv-error').style.display = 'block';
         }
       }
       isValidUserfullName()
       isValidUseremail()
+
       isValidUserccNum()
       isValidUserZip()
       isValidUserCvv()
