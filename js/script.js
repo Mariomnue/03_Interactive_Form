@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
   //Payment information
   const userPayment = document.getElementById("payment")//payment type CC, paypal, bitcoin
+  userPayment[1].selected;//show credit card by default;
   const userCCNum = document.getElementById("cc-num")
   const userZip = document.getElementById("zip")
   const userCvv = document.getElementById("cvv")
@@ -158,25 +159,45 @@ document.addEventListener('DOMContentLoaded', () =>{
     * Payment Info
     *
     */
+////credit card selected by default;
 //select one payment method, display appropriate section
   function paymentInfoReset(){
-    document.getElementById('credit-card').style.display = "none";
-    document.getElementById('paypal').style.display = "none";
-    document.getElementById('bitcoin').style.display = "none";
+    creditCard = document.getElementById('credit-card');//onStage ccNum zip cvv
+      creditCard.style.display = "block";
+    paypal = document.getElementById('paypal');//onStage description
+      paypal.style.display = "none";
+    bitcoin = document.getElementById('bitcoin');//onStage description
+      bitcoin.style.display = "none";
   }
   paymentInfoReset()//init the payment information section
-
-    userPayment.addEventListener('click', (e) =>{
+//error messages below
+  function resetErrorMsg(){
+    creditCard.style.display = "none";
+    paymentError.style.display = 'none';
+    paypal.style.display = "none";
+    bitcoin.style.display = "none";
+    cardError.style.display = 'none';
+    zipError.style.display = 'none';
+    cvvError.style.display = 'none';
+  }
+    
+    userPayment.addEventListener('click', (e) =>{//listeners
     if(userPayment.value === 'credit card'){
       paymentInfoReset();
-      document.getElementById('credit-card').style.display = "block";
+      creditCard.style.display = "block";
+    }else if(userPayment.value === 'select method'){
+      paymentInfoReset();
+      resetErrorMsg();
     }else if(userPayment.value === 'paypal'){
       paymentInfoReset();
-      document.getElementById('paypal').style.display = "block";
+      resetErrorMsg();
+      paypal.style.display = "block";
     }else if(userPayment.value === 'bitcoin'){
-      paymentInfoReset()
-      document.getElementById('bitcoin').style.display = "block";
+      paymentInfoReset();
+      resetErrorMsg();
+      bitcoin.style.display = "block";
     }
+console.log(userPayment.value)
   });
 
 
@@ -253,10 +274,12 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 //must select payment type;
       function isValidPayment(){
-        if(userPayment.value === 'select method'){
-          paymentError.style.display = "block"
-        }else{
-          paymentError.style.display = "none"
+        if(userPayment.value === 'paypal' || userPayment === 'bitcoin'){
+          paymentError.style.display = "none";
+        }else if(userPayment === 'select method'){
+          paymentError.style.display = "block";
+        }else if(userPayment.value === 'credit card'){
+          paymentError.style.display = "none";
 //must be 13 to 16 digits
           function isValidUserccNum(){
             const ccNum = userCCNum.value;
