@@ -34,18 +34,18 @@ document.addEventListener('DOMContentLoaded', () =>{
   //Make the other-title field only appear when other is selected;
   const otherTitle = document.getElementById("other-title")
   let usersTitle;
-  document.getElementById("other-title").style.display = "none";
+  otherTitle.style.display = "none";
 //reset other to display none;
       function setOtherTitle(){
         if(userTitle.value != 'other'){
-          document.getElementById("other-title").style.display = "none";
+          otherTitle.style.display = "none";
         }
       }
 //show other option text input if other is selected and focus;
       function turnOnOtherTitle(){
         setOtherTitle();//reset the optional title
         if(userTitle.value === 'other'){
-           document.getElementById("other-title").style.display = "block";
+           otherTitle.style.display = "block";
            otherTitle.focus();
         }
        }
@@ -216,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () =>{
         if(fullName){
           const ttname = document.getElementById('ttname').style.display = "none";
           userError.style.display = 'none';
-
         }else{
           const ttname = document.getElementById('ttname').style.display = "block";
           userError.style.display = 'block';
@@ -254,10 +253,8 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 //must select payment type;
       function isValidPayment(){
-
         if(userPayment.value === 'select method'){
           paymentError.style.display = "block"
-
         }else{
           paymentError.style.display = "none"
 //must be 13 to 16 digits
@@ -265,24 +262,20 @@ document.addEventListener('DOMContentLoaded', () =>{
             const ccNum = userCCNum.value;
             testccNum = /^\d{13,16}$/.test(ccNum);
              if(testccNum){
-               //console.log(ccNum+ " ccNum: TRUE needs work")
                const ttccNum = document.getElementById('ttccNum').style.display = "none";
-             cardError.style.display = 'none';
+               cardError.style.display = 'none';
              }else{
-               //console.log(ccNum+ " ccNum: FALSE needs work?")
                const ttccNum = document.getElementById('ttccNum').style.display = "block";
                cardError.style.display = 'block';
              }
            }
-           //must be 5 digits
+//must be 5 digits
           function isValidUserZip(){
             testZip = /^\d{5}$/.test(Zip);
              if(testZip){
-               //console.log(Zip+ " Zip: TRUE needs work")
                const ttZip = document.getElementById('ttZip').style.display = "none";
                zipError.style.display = 'none';
              }else{
-               //console.log(Zip+ " Zip: FALSE needs work?")
                const ttZip = document.getElementById('ttZip').style.display = "block";
                zipError.style.display = 'block';
              }
@@ -291,11 +284,9 @@ document.addEventListener('DOMContentLoaded', () =>{
           function isValidUserCvv(){
             testCvv = /^\d{3}$/.test(Cvv);
              if(testCvv){
-               //console.log(Cvv+ " Cvv: TRUE needs work")
                const ttCvv = document.getElementById('ttCvv').style.display = "none";
                cvvError.style.display = 'none';
              }else{
-               //console.log(Cvv+ " Cvv: FALSE needs work?")
                const ttCvv = document.getElementById('ttCvv').style.display = "block";
                cvvError.style.display = 'block';
              }
