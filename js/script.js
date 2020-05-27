@@ -30,44 +30,40 @@ document.addEventListener('DOMContentLoaded', () =>{
    *
    */
 
-/////5-26-2020 set user titleError
-
-
-
-
   //userTitle
-  //Make the other-title field only appear when other is selected
+  //Make the other-title field only appear when other is selected;
   const otherTitle = document.getElementById("other-title")
+  let usersTitle;
   document.getElementById("other-title").style.display = "none";
+//reset other to display none;
       function setOtherTitle(){
         if(userTitle.value != 'other'){
           document.getElementById("other-title").style.display = "none";
         }
       }
-
+//show other option text input if other is selected and focus;
       function turnOnOtherTitle(){
-      setOtherTitle();//reset the optional title
+        setOtherTitle();//reset the optional title
         if(userTitle.value === 'other'){
            document.getElementById("other-title").style.display = "block";
            otherTitle.focus();
         }
        }
-
+//Job Roll event listeners
     userTitle.addEventListener("click", (e) =>{
-        turnOnOtherTitle();
+        //turnOnOtherTitle();
         if(userTitle.value === "other"){
-          return otherTitle.value;
+          turnOnOtherTitle();
+          return;// otherTitle.value;
         }else{
-          return userTitle.value;
+          usersTitle = userTitle.value;
+          return usersTitle;
         }
-
     });
-    userTitle.addEventListener("blur", (e) =>{
-      userTitle.value = otherTitle.value;
-console.log(userTitle.value)
-      return userTitle;
+    otherTitle.addEventListener("blur", (e) =>{
+      usersTitle = otherTitle.value;
+      return usersTitle;
     })
-
 
   /**
    *
@@ -97,7 +93,6 @@ console.log(userTitle.value)
 
 //select a design to release the color options for that shirt.
    userDesign.addEventListener('click', (e) =>{
-
      if(userDesign[0].selected){
        colorReset();
      }
@@ -111,7 +106,6 @@ console.log(userTitle.value)
         userColor[5].hidden = true;//steelblue
         userColor[6].hidden = true;//dim grey
         userColor[1].selected = true;
-//console.log('puns: ' +userDesign.value)
       }else if(userDesign[2].selected){
       //colors available are tomato, Steel Blue, Dim Gray
         userColor[0].hidden = true;
@@ -130,29 +124,22 @@ console.log(userTitle.value)
       * Activities
       *
       */
-//let otherTitle = document.getElementById("other-title").style.display = "none";
-//otherTitle.placeholder = "Your Job Roll";
 
-   //do not allow selection of duplicate times;
+//do not allow selection of duplicate items/times;
       const checkboxes = document.querySelectorAll('.activities input');
       let total = 0;
-
-      let runningTotal = document.getElementById("totalCost").style.display = "block";
-      runningTotal.value = "Total: "
-console.log("runningTotal: " +total+ " needs more work");
-
-
-       document.querySelector('.activities').addEventListener('change', (e) => {
-         const clicked = e.target;
-         const clickedType = clicked.getAttribute('data-day-and-time');
-           total = 0;
+      document.querySelector('.activities').addEventListener('change', (e) => {
+        const clicked = e.target;
+        const clickedType = clicked.getAttribute('data-day-and-time');
+        total = 0;
            for(let j=0; j<checkboxes.length; j++){
              if(checkboxes[j].checked){
               total += parseInt(checkboxes[j].getAttribute('data-cost'));
+              let costText = document.getElementById('totalCost')
+              costText.style.display = "block";
+              costText.innerHTML = "Total: $" +total;
              }
            }
-console.log("total: " + total);
-//console.log(checkboxes[2].text)
          for(let i=0; i<checkboxes.length; i++){
            let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
            if(clickedType === themAttr && clicked !== checkboxes[i]){
@@ -166,19 +153,18 @@ console.log("total: " + total);
        })
 
 
-
    /**
     *
     * Payment Info
     *
     */
 //select one payment method, display appropriate section
-function paymentInfoReset(){
+  function paymentInfoReset(){
     document.getElementById('credit-card').style.display = "none";
     document.getElementById('paypal').style.display = "none";
     document.getElementById('bitcoin').style.display = "none";
   }
-paymentInfoReset()//init the payment information section
+  paymentInfoReset()//init the payment information section
 
     userPayment.addEventListener('click', (e) =>{
     if(userPayment.value === 'credit card'){
@@ -197,29 +183,26 @@ paymentInfoReset()//init the payment information section
 
    /**
     *
-    * VALIDATION - text fields
+    * VALIDATION
     *
     */
 
-    // if (!cvvIsValid && creditPayment) {
-    //         console.log('invalid cvv');
-    //         document.querySelector('#cvv-error').style.display = 'inherit';
-    //     } else {
-    //         document.querySelector('#cvv-error').style.display = 'none';
-    //     };
 
-//////////    START HERE  /////////////////
+  const userError = document.querySelector('#user-error');
+    userError.style.display = 'none';
+  const emailError = document.querySelector('#email-error');
+    emailError.style.display = 'none';
+  const activitiesError = document.querySelector('#activities-error');
+    activitiesError.style.display = 'none';
+  const paymentError = document.querySelector('#payment-error');
+    paymentError.style.display = 'none';
+  const cardError = document.querySelector('#card-error');
+    cardError.style.display = 'none';
+  const zipError = document.querySelector('#zip-error');
+    zipError.style.display = 'none';
+  const cvvError = document.querySelector('#cvv-error');
+    cvvError.style.display = 'none';
 
-  const userError = document.querySelector('#user-error').style.display = 'none';
-  const emailError = document.querySelector('#email-error').style.display = 'none';
-  const titleError = document.querySelector('#title-error').style.display = 'none';
-  const activitiesError = document.querySelector('#activities-error').style.display = 'none';
-  const paymentError = document.querySelector('#payment-error').style.display = 'none';
-  const cardError = document.querySelector('#card-error').style.display = 'none';
-  const zipError = document.querySelector('#zip-error').style.display = 'none';
-  const cvvError = document.querySelector('#cvv-error').style.display = 'none';
-
-//console.log('userError: ' +userError+ " " +cvvError);
 
    function validator(){
      const fullName = userNameInput.value;
@@ -229,78 +212,105 @@ paymentInfoReset()//init the payment information section
      const Cvv = userCvv.value;
 
      function isValidUserfullName(){
-       //no blanks
+//no blanks
         if(fullName){
-          //console.log(fullName+ " name: TRUE needs work")
           const ttname = document.getElementById('ttname').style.display = "none";
-          document.querySelector('#user-error').style.display = "none";
+          userError.style.display = 'none';
 
         }else{
-          console.log(userError+ " name: FALSE needs work?")
           const ttname = document.getElementById('ttname').style.display = "block";
-          document.querySelector('#user-error').style.display = "block";
+          userError.style.display = 'block';
         }
       }
-      //must be a valid email
+//must be a valid email
      function isValidUseremail(){
        testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
         if(testemail){
-          //console.log(email+ " email: TRUE needs work")
           const ttemail = document.getElementById('ttemail').style.display = "none";
-          document.querySelector('#email-error').style.display = 'none';
+          emailError.style.display = 'none';
         }else{
-          //console.log(email+ " email: FALSE needs work?")
           const ttemail = document.getElementById('ttemail').style.display = "block";
-          document.querySelector('#email-error').style.display = 'block';
+          emailError.style.display = 'block';
+        }
+      }
+//defaults to fs-js-dev but has "other" field
+      function isValidTitle(){
+        if(userTitle && userTitle.value != "other"){
+          return userTitle.value;
+        }else{
+          return usersTitle;//otherTitle
+        }
+      }
 
-        }
-      }
-      //must be 13 to 16 digits
-     function isValidUserccNum(){
-       const ccNum = userCCNum.value;
-       testccNum = /^\d{13,16}$/.test(ccNum);
-        if(testccNum){
-          //console.log(ccNum+ " ccNum: TRUE needs work")
-          const ttccNum = document.getElementById('ttccNum').style.display = "none";
-          document.querySelector('#card-error').style.display = 'none';
+      function isValidActivities(){
+        if(total>0){
+          activitiesError.style.display = 'none';
+          return true;
         }else{
-          //console.log(ccNum+ " ccNum: FALSE needs work?")
-          const ttccNum = document.getElementById('ttccNum').style.display = "block";
-          document.querySelector('#card-error').style.display = 'block';
+          activitiesError.style.display = 'block';
+          return false;
         }
       }
-      //must be 5 digits
-     function isValidUserZip(){
-       testZip = /^\d{5}$/.test(Zip);
-        if(testZip){
-          //console.log(Zip+ " Zip: TRUE needs work")
-          const ttZip = document.getElementById('ttZip').style.display = "none";
-          document.querySelector('#zip-error').style.display = 'none';
+
+//must select payment type;
+      function isValidPayment(){
+
+        if(userPayment.value === 'select method'){
+          paymentError.style.display = "block"
+
         }else{
-          //console.log(Zip+ " Zip: FALSE needs work?")
-          const ttZip = document.getElementById('ttZip').style.display = "block";
-          document.querySelector('#zip-error').style.display = 'block';
+          paymentError.style.display = "none"
+//must be 13 to 16 digits
+          function isValidUserccNum(){
+            const ccNum = userCCNum.value;
+            testccNum = /^\d{13,16}$/.test(ccNum);
+             if(testccNum){
+               //console.log(ccNum+ " ccNum: TRUE needs work")
+               const ttccNum = document.getElementById('ttccNum').style.display = "none";
+             cardError.style.display = 'none';
+             }else{
+               //console.log(ccNum+ " ccNum: FALSE needs work?")
+               const ttccNum = document.getElementById('ttccNum').style.display = "block";
+               cardError.style.display = 'block';
+             }
+           }
+           //must be 5 digits
+          function isValidUserZip(){
+            testZip = /^\d{5}$/.test(Zip);
+             if(testZip){
+               //console.log(Zip+ " Zip: TRUE needs work")
+               const ttZip = document.getElementById('ttZip').style.display = "none";
+               zipError.style.display = 'none';
+             }else{
+               //console.log(Zip+ " Zip: FALSE needs work?")
+               const ttZip = document.getElementById('ttZip').style.display = "block";
+               zipError.style.display = 'block';
+             }
+           }
+           //must be 3 digits
+          function isValidUserCvv(){
+            testCvv = /^\d{3}$/.test(Cvv);
+             if(testCvv){
+               //console.log(Cvv+ " Cvv: TRUE needs work")
+               const ttCvv = document.getElementById('ttCvv').style.display = "none";
+               cvvError.style.display = 'none';
+             }else{
+               //console.log(Cvv+ " Cvv: FALSE needs work?")
+               const ttCvv = document.getElementById('ttCvv').style.display = "block";
+               cvvError.style.display = 'block';
+             }
+           }
+           isValidUserccNum()
+           isValidUserZip()
+           isValidUserCvv()
         }
       }
-      //must be 3 digits
-     function isValidUserCvv(){
-       testCvv = /^\d{3}$/.test(Cvv);
-        if(testCvv){
-          //console.log(Cvv+ " Cvv: TRUE needs work")
-          const ttCvv = document.getElementById('ttCvv').style.display = "none";
-          document.querySelector('#cvv-error').style.display = 'none';
-        }else{
-          //console.log(Cvv+ " Cvv: FALSE needs work?")
-          const ttCvv = document.getElementById('ttCvv').style.display = "block";
-          document.querySelector('#cvv-error').style.display = 'block';
-        }
-      }
+
       isValidUserfullName()
       isValidUseremail()
-
-      isValidUserccNum()
-      isValidUserZip()
-      isValidUserCvv()
+      isValidTitle()
+      isValidActivities()
+      isValidPayment()
    }
 
   form.addEventListener('submit', (e) =>{
@@ -310,15 +320,7 @@ paymentInfoReset()//init the payment information section
      e.preventDefault(userZip);
      e.preventDefault(userCvv);
      validator();
-     //validatorAll();
-//  console.log('userNameInput: '+userNameInput.value+ " userEmail: " +userEmail.value+ " userTitle: " +userTitle.value);
    });
-
-
-
-
-
-
 
   /**
    *
