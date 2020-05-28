@@ -25,7 +25,8 @@
         <input type="text" id="name" name="name">
 
         <label for="mail">Email:</label>
-        <span class="tooltip" id='ttemail'>Must be a valid email</span>
+        <span class="tooltip" id='ttemail'>Must contain the "@" symbol and ".com", ".net", or ".org";</span>
+        <span class="tooltip" id='ttemail2'>Must be a valid email.</span>
         <input type="email" id="mail" name="user-email">
 
 
@@ -108,7 +109,7 @@
             <input type="checkbox" name="npm" data-day-and-time="Wednesday 1pm-4pm" data-cost="100">
             npm Workshop — Wednesday 1pm-4pm, $100
           </label>
-          <span id="totalCost" class="totalCost">Total: $ </span>
+          <span id="totalCost" class="totalCost" hidden>Total: $ </span>
 
 
       </fieldset>
@@ -127,22 +128,22 @@
 
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
-            <span id="ttccNum" class="tooltip">Please enter a Credit Card number</span>
-            <span id="ttccNum2" class="tooltip">Must be between 13 and 16 numbers</span>
+            <span id="ttccNum" class="tooltip">Please enter a Credit Card number.</span>
+            <span id="ttccNum2" class="tooltip">Must be between 13 and 16 numbers.</span>
         	  <input id="cc-num" name="user-cc-num" type="text">
 
           </div>
 
           <div class="col-3 col">
             <label for="zip">Zip Code:</label>
-            <span id="ttZip" class="tooltip">Must be 5 numbers</span>
+            <span id="ttZip" class="tooltip">Must be 5 numbers.</span>
             <input id="zip" name="user-zip" type="text">
 
           </div>
 
           <div class="col-3 col">
             <label for="cvv">CVV:</label>
-            <span id="ttCvv" class="tooltip">Must be 3 numbers</span>
+            <span id="ttCvv" class="tooltip">Must be 3 numbers.</span>
             <input id="cvv" name="user-cvv" type="text">
 
           </div>
@@ -173,45 +174,45 @@
         </div>
 
         <div id="paypal" class="paypal">
-        	<p>If you selected the PayPal option we'll take you to Paypal's site to set up your billing information, when you click “Register” below.</p>
+        	<p>If you selected the PayPal option you will be taken to Paypal's site to set up your billing information, when you click “Register” below.</p>
         </div>
 
         <div id="bitcoin" class="bitcoin">
-        	<p>If you selected the Bitcoin option we'll take you to the Coinbase site to set up your billing information. Due to the nature of exchanging Bitcoin, all Bitcoin transactions will be final.</p>
+        	<p>If you selected the Bitcoin option will be taken to the Coinbase site to set up your billing information. Due to the nature of exchanging Bitcoin, all Bitcoin transactions will be final.</p>
         </div>
 
       </fieldset>
 
       <div id="error-field">
-        <p id="user-error" class="errorBox">
+        <p id="user-error" class="errorBox" hidden>
           There is an error in the "Name" field:<br>
-          <span>Please write a name!</span>
+          <span>Please type a name.</span>
         </p>
-        <p id="email-error" class="errorBox">
+        <p id="email-error" class="errorBox" hidden>
           There is an error in the "Email:" field:<br>
-          <span>Please write use a valid email!</span>
+          <span>Please type a valid email.</span>
         </p>
-        <p id="activities-error" class="errorBox">
+        <p id="activities-error" class="errorBox" hidden>
           There is an error in the "Register for Activities:" field:<br>
-          <span>Please select one or more events!</span>
+          <span>Please select one or more events.</span>
         </p>
-        <p id="payment-error" class="errorBox">
+        <p id="payment-error" class="errorBox" hidden>
           There is an error in the "Payment Info" field:<br>
-          <span>Please select payment type!</span>
+          <span>Please select payment type.</span>
         </p>
-        <p id="card-error" class="errorBox">
+        <p id="card-error" class="errorBox"  hidden>
           There is an error in the "Card Number:" field:<br>
-          <span>Please use between 13 and 16 numbers!</span>
+          <span>Please use between 13 and 16 numbers.</span>
         </p>
-        <p id="zip-error" class="errorBox">
+        <p id="zip-error" class="errorBox"  hidden>
           There is an error in the "Zipcode:" field:<br>
-          <span>Please use 5 numbers!</span>
+          <span>Please use 5 numbers.</span>
         </p>
-        <p id="cvv-error" class="errorBox">
+        <p id="cvv-error" class="errorBox"  hidden>
           There is an error in the "CVV:" field:<br>
-          <span>Please use 3 numbers!</span>
+          <span>Please use 3 numbers.</span>
         </p>
-        <p id="register" class="errorBox">
+        <p id="register" class="errorBox" hidden>
           Thank you for registering for the Full Stack Conference<br>
           <span>Your tickets will be emailed to the address you provided.<br>
             Enjoy the Full Stack Conference!</span>

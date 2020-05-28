@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () =>{
 	//User information
 	const userNameInput = document.getElementById("name");
 		userNameInput.focus();
+	//let userNameOutput;
 	const userEmail = document.getElementById("mail")
+	//let userEmailOutput;
 	let userTitle = document.getElementById("title")//Job roll
 
 	//T-shirt information
@@ -267,6 +269,8 @@ document.addEventListener('DOMContentLoaded', () =>{
 		ttname.style.display = "none";
 	const ttemail = document.getElementById('ttemail');
 		ttemail.style.display = "none";
+	const ttemail2 = document.getElementById('ttemail2');
+		ttemail.style.display = "none";
 	const ttccNum = document.getElementById('ttccNum');
 		ttccNum.style.display = "none";
 	const ttccNum2 = document.getElementById('ttccNum2');
@@ -303,11 +307,13 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 function isValidUseremail(){
 			 testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
 				if(testemail){
+					ttemail2.style.display = "none";//show the format
 					ttemail.style.display = "none";
 					emailError.style.display = 'none';
 					return true;
 				}else{
-					ttemail.style.display = "block";
+					ttemail2.style.display = "block";
+					//ttemail.style.display = "block";
 					emailError.style.display = 'block';
 					return false;
 				}
@@ -410,7 +416,15 @@ document.addEventListener('DOMContentLoaded', () =>{
 				cnt += 1;
 			}
 			return cnt;
-	 }
+	 }//end validator
+
+
+	 /**
+		*
+		* EVENT LISTENERS
+		*
+		*/
+
 
 	form.addEventListener('submit', (e) =>{
 		 e.preventDefault(userNameInput);
@@ -418,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 e.preventDefault(userCCNum);
 		 e.preventDefault(userZip);
 		 e.preventDefault(userCvv);
-		 let cntVal = validator();
+		 let cntVal = validator();//call to validator
  		 if(cntVal === 5){
 			  document.getElementById('register').style.display = "block";
 //Make the register button go away.
@@ -438,8 +452,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 				}
 
 		})
-
-
 
 	/**
 	 *
