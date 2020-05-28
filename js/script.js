@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 	const form = document.querySelector("form");
 	//User information
 	const userNameInput = document.getElementById("name");
-	userNameInput.focus();
+		userNameInput.focus();
 	const userEmail = document.getElementById("mail")
 	let userTitle = document.getElementById("title")//Job roll
 
@@ -10,12 +10,10 @@ document.addEventListener('DOMContentLoaded', () =>{
 	const userSize = document.getElementById("size")
 	const userDesign = document.getElementById("design")
 	const userColor = document.getElementById("color")
-	//selected Activities
-	//1=3,2=4
 
 	//Payment information
 	const userPayment = document.getElementById("payment")//payment type CC, paypal, bitcoin
-	userPayment[1].selected;//show credit card by default;
+		userPayment[1].selected;//show credit card by default;
 	const userCCNum = document.getElementById("cc-num")
 	const userZip = document.getElementById("zip")
 	const userCvv = document.getElementById("cvv")
@@ -33,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 	//userTitle
 	//Make the other-title field only appear when other is selected;
-	const otherTitle = document.getElementById("other-title")
+	const otherTitle = document.getElementById("other-title");
+		otherTitle.style.display = "none";
 	let usersTitle;
-	otherTitle.style.display = "none";
 //reset other to display none;
 			function setOtherTitle(){
 				if(userTitle.value != 'other'){
@@ -72,11 +70,14 @@ document.addEventListener('DOMContentLoaded', () =>{
 	 *
 	 */
 
+	 const labelColor = document.getElementById('tShirtColor')//make color field hidden
+	 	labelColor.style.display = 'none';
+
 ///set the color selector to "Please select a T-shirt theme"
 //tShirtColor
 	function colorInit(){
 		userColor.style.display = "none";
-		labelColor = document.getElementById('tShirtColor').style.display = 'none';
+		labelColor.style.display = 'none';
 //create the dead color selector, give it a value, then select it.
 			colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
 			colorControl.text = "Please select a T-shirt theme";
@@ -91,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 	function colorReset(){
 		userColor[0].selected = true;
 		userColor.style.display = "none";
-		labelColor = document.getElementById('tShirtColor');
-			labelColor.style.display = 'none';
+		labelColor.style.display = 'none';
 		for(let i=0; i<userColor.length; i++){
 		 userColor[i].hidden = true;
 		}
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 if(userDesign[1].selected){
 				colorReset();
 				userColor.style.display = "block";
-				labelColor = tShirtColor.style.display = 'block';
+				labelColor.style.display = 'block';
 				userColor[1].hidden = false;//cornflowerblue
 				userColor[2].hidden = false;//darkslategrey
 				userColor[3].hidden = false;//gold
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 			}else if(userDesign[2].selected){
 				colorReset();
 				userColor.style.display = "block";
-				labelColor = tShirtColor.style.display = 'block';
+				labelColor.style.display = 'block';
 				userColor[4].hidden = false;//tomato
 				userColor[5].hidden = false;//steelblue
 				userColor[6].hidden = false;//dim grey
@@ -127,8 +127,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 			* Activities
 			*
 			*/
-			const jsFrameworks = document.querySelector("label[for='js-frameworks'");
-			const jsLibs = document.querySelector("label[for='js-libs'");
+
+			//selected Activities
+			//1=3,2=4 match, user cannot select both.
+			const jsframeworks = document.querySelector("label[for='jsframeworks'");
+			const jslibs = document.querySelector("label[for='jslibs'");
 			const express = document.querySelector("label[for='express'");
 			const node = document.querySelector("label[for='node'");
 
@@ -150,11 +153,38 @@ document.addEventListener('DOMContentLoaded', () =>{
 				 for(let i=0; i<checkboxes.length; i++){
 					 let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
 					 let themLabel = checkboxes[i].getAttribute('name');
+					 let matchingNode = checkboxes[i].getAttribute('name');
 					 if(clickedType === themAttr && clicked !== checkboxes[i]){//same date and time & NOT the clicked element
 						 if(clicked.checked){
 							 checkboxes[i].disabled = true;//dim the matching checkbox;
+							 if(matchingNode === checkboxes[i].name){//gray the matching
+								 if(matchingNode === "express"){
+									  express.style.color = 'gray';
+								 }
+								 if(matchingNode === "jsframeworks"){
+									  jsframeworks.style.color = 'gray';
+								 }
+								 if(matchingNode === "jslibs"){
+									  jslibs.style.color = 'gray';
+								 }
+								 if(matchingNode === "node"){
+									  node.style.color = 'gray';
+								 }
+							 }
 						 }else{
 							 checkboxes[i].disabled = false;
+							 if(matchingNode === "express"){
+									express.style.color = 'black';
+							 }
+							 if(matchingNode === "jsframeworks"){
+									jsframeworks.style.color = 'black';
+							 }
+							 if(matchingNode === "jslibs"){
+									jslibs.style.color = 'black';
+							 }
+							 if(matchingNode === "node"){
+									node.style.color = 'black';
+							 }
 						 }
 					 }
 				 }
@@ -214,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 		*
 		*/
 
-//HTML elements to display errors
+//White boxed messages appear at bottom to display errors
 	const userError = document.querySelector('#user-error');
 		userError.style.display = 'none';
 	const emailError = document.querySelector('#email-error');
@@ -232,6 +262,20 @@ document.addEventListener('DOMContentLoaded', () =>{
 	const register = document.querySelector('#register');
 		register.style.display = 'none';
 
+//small red text appears above text fields
+	const ttname = document.getElementById('ttname');
+		ttname.style.display = "none";
+	const ttemail = document.getElementById('ttemail');
+		ttemail.style.display = "none";
+	const ttccNum = document.getElementById('ttccNum');
+		ttccNum.style.display = "none";
+	const ttccNum2 = document.getElementById('ttccNum2');
+		ttccNum2.style.display = "none";
+	const ttZip = document.getElementById('ttZip');
+		ttZip.style.display = "none";
+	const ttCvv = document.getElementById('ttCvv');
+		ttCvv.style.display = "none";
+
 
 	let cnt = 0;// global var used to count the number of valid elements
 
@@ -246,11 +290,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 function isValidUserfullName(){
 //no blanks
 				if(fullName){
-					const ttname = document.getElementById('ttname').style.display = "none";
+					ttname.style.display = "none";
 					userError.style.display = 'none';
 					return true;
 				}else{
-					const ttname = document.getElementById('ttname').style.display = "block";
+					ttname.style.display = "block";
 					userError.style.display = 'block';
 					return false;
 				}
@@ -259,11 +303,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 function isValidUseremail(){
 			 testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
 				if(testemail){
-					const ttemail = document.getElementById('ttemail').style.display = "none";
+					ttemail.style.display = "none";
 					emailError.style.display = 'none';
 					return true;
 				}else{
-					const ttemail = document.getElementById('ttemail').style.display = "block";
+					ttemail.style.display = "block";
 					emailError.style.display = 'block';
 					return false;
 				}
@@ -301,11 +345,18 @@ document.addEventListener('DOMContentLoaded', () =>{
 						const ccNum = userCCNum.value;
 						testccNum = /^\d{13,16}$/.test(ccNum);
 						 if(testccNum){
-							 const ttccNum = document.getElementById('ttccNum').style.display = "none";
+							 ttccNum.style.display = "none";
+							 ttccNum2.style.display = "none";
 							 cardError.style.display = 'none';
 							 return true;
+						 }else if(ccNum.length != 0 && ccNum.length < 13 || ccNum.length > 16){
+							 ttccNum2.style.display = "block";
+							 ttccNum.style.display = "none";
+							 cardError.style.display = 'block';
+							 return false;
 						 }else{
-							 const ttccNum = document.getElementById('ttccNum').style.display = "block";
+							 ttccNum.style.display = "block";
+							 ttccNum2.style.display = "none";
 							 cardError.style.display = 'block';
 							 return false;
 						 }
@@ -314,11 +365,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 					function isValidUserZip(){
 						testZip = /^\d{5}$/.test(Zip);
 						 if(testZip){
-							 const ttZip = document.getElementById('ttZip').style.display = "none";
+							 ttZip.style.display = "none";
 							 zipError.style.display = 'none';
 							 return true;
 						 }else{
-							 const ttZip = document.getElementById('ttZip').style.display = "block";
+							 ttZip.style.display = "block";
 							 zipError.style.display = 'block';
 							 return false;
 						 }
@@ -327,11 +378,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 					function isValidUserCvv(){
 						testCvv = /^\d{3}$/.test(Cvv);
 						 if(testCvv){
-							 const ttCvv = document.getElementById('ttCvv').style.display = "none";
+							 ttCvv.style.display = "none";
 							 cvvError.style.display = 'none';
 							 return true;
 						 }else{
-							 const ttCvv = document.getElementById('ttCvv').style.display = "block";
+							 ttCvv.style.display = "block";
 							 cvvError.style.display = 'block';
 							 return false;
 						 }
@@ -379,10 +430,10 @@ document.addEventListener('DOMContentLoaded', () =>{
 				const email = userEmail.value;
 				testemail = /[a-zA-Z0-9]+\@\w+\.[org|com|net]+/.test(email);
 				if(testemail){
-					const ttemail = document.getElementById('ttemail').style.display = "none";
+					ttemail.style.display = "none";
 					emailError.style.display = 'none';
 				}else{
-					const ttemail = document.getElementById('ttemail').style.display = "block";
+					ttemail.style.display = "block";
 					emailError.style.display = 'block';
 				}
 
