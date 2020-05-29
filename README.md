@@ -6,7 +6,10 @@
 
 Enter less than 13 or more than 16 digits and different helper text appears above the input field stating: "Must be between 13 and 16 numbers"
 
-3) Real-time Error Messages: Email section: select field, begin typing, helper text appears stating: "Must contain the "@" symbol and ".com", ".net", or ".org".
+3) Real-time Error Messages: Email section: select field, begin typing, helper text appears stating: "Must contain the "@" symbol and ".com", ".net", or ".org"  and message box appears above button.
+After a proper email has been entered both messages dissappear.
+
+
  
 
 

@@ -7,12 +7,10 @@ document.addEventListener('DOMContentLoaded', () =>{
 	const userEmail = document.getElementById("mail")
 	//let userEmailOutput;
 	let userTitle = document.getElementById("title")//Job roll
-
 	//T-shirt information
 	const userSize = document.getElementById("size")
 	const userDesign = document.getElementById("design")
 	const userColor = document.getElementById("color")
-
 	//Payment information
 	const userPayment = document.getElementById("payment")//payment type CC, paypal, bitcoin
 		userPayment[1].selected;//show credit card by default;
@@ -21,9 +19,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 	const userCvv = document.getElementById("cvv")
 	const userExpMonth = document.getElementById("exp-month")
 	const userExpYear = document.getElementById("exp-year")
-
 	const submitButton = document.querySelector('button');
-
 
 	/**
 	 *
@@ -31,63 +27,55 @@ document.addEventListener('DOMContentLoaded', () =>{
 	 *
 	 */
 
-	//userTitle
-	//Make the other-title field only appear when other is selected;
+//Make the other-title field appear only when "Other" is selected;
 	const otherTitle = document.getElementById("other-title");
 		otherTitle.style.display = "none";
 	let usersTitle;
-//reset other to display none;
-			function setOtherTitle(){
-				if(userTitle.value != 'other'){
-					otherTitle.style.display = "none";
-				}
-			}
-//show other option text input if other is selected and focus;
-			function turnOnOtherTitle(){
-				setOtherTitle();//reset the optional title
-				if(userTitle.value === 'other'){
-					 otherTitle.style.display = "block";
-					 otherTitle.focus();
-				}
-			 }
-//Job Roll event listeners
-		userTitle.addEventListener("click", (e) =>{
-				//turnOnOtherTitle();
-				if(userTitle.value === "other"){
-					turnOnOtherTitle();
-					return;// otherTitle.value;
-				}else{
-					usersTitle = userTitle.value;
-					return usersTitle;
-				}
-		});
-		otherTitle.addEventListener("blur", (e) =>{
-			usersTitle = otherTitle.value;
+
+	function setOtherTitle(){
+		if(userTitle.value != 'other'){
+			otherTitle.style.display = "none";
+		}
+	}
+	//show other option text input if other is selected and focus;
+	//Job Roll event listeners
+	userTitle.addEventListener("click", (e) =>{
+	//turnOnOtherTitle();
+		if(userTitle.value === "other"){
+			setOtherTitle();//reset the optional title
+			otherTitle.style.display = "block";
+			otherTitle.focus();
+			return;// otherTitle.value;
+		}else{
+			usersTitle = userTitle.value;
 			return usersTitle;
-		})
+		}
+	});
+	otherTitle.addEventListener("blur", (e) =>{
+	usersTitle = otherTitle.value;
+	return usersTitle;
+	})
+
 
 	/**
 	 *
 	 * T-Shirt Info
 	 *
 	 */
-
-	 const labelColor = document.getElementById('tShirtColor')//make color field hidden
-	 	labelColor.style.display = 'none';
-
 ///set the color selector to "Please select a T-shirt theme"
-//tShirtColor
+	const labelColor = document.getElementById('tShirtColor')//make color field hidden
+		labelColor.style.display = 'none';
 	function colorInit(){
 		userColor.style.display = "none";
 		labelColor.style.display = 'none';
 //create the dead color selector, give it a value, then select it.
-			colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
-			colorControl.text = "Please select a T-shirt theme";
-			userColor[0].selected = true;
-//hide all the colors until design has been selected.
-			for(let i=0; i<userColor.length; i++){
-				userColor[i].hidden = true;
-			}
+		colorControl = userColor.insertBefore(document.createElement('option'),userColor.firstElementChild);
+		colorControl.text = "Please select a T-shirt theme";
+		userColor[0].selected = true;
+//hide ALL the colors until design has been selected.
+		for(let i=0; i<userColor.length; i++){
+			userColor[i].hidden = true;
+		}
 	}
 	colorInit();//run the init;
 
@@ -104,23 +92,21 @@ document.addEventListener('DOMContentLoaded', () =>{
 	 userDesign.addEventListener('click', (e) =>{
 		 if(userDesign[0].selected){
 			 colorReset();
-		 }
-		 if(userDesign[1].selected){
-				colorReset();
-				userColor.style.display = "block";
-				labelColor.style.display = 'block';
-				userColor[1].hidden = false;//cornflowerblue
-				userColor[2].hidden = false;//darkslategrey
-				userColor[3].hidden = false;//gold
-				userColor[1].selected = true;
-			}else if(userDesign[2].selected){
-				colorReset();
-				userColor.style.display = "block";
-				labelColor.style.display = 'block';
-				userColor[4].hidden = false;//tomato
-				userColor[5].hidden = false;//steelblue
-				userColor[6].hidden = false;//dim grey
-				userColor[4].selected = true;
+		 }else{
+			 colorReset();
+			 userColor.style.display = "block";
+			 labelColor.style.display = 'block';
+			 if(userDesign[1].selected){
+					userColor[1].hidden = false;//cornflowerblue
+					userColor[2].hidden = false;//darkslategrey
+					userColor[3].hidden = false;//gold
+					userColor[1].selected = true;
+				}else if(userDesign[2].selected){
+					userColor[4].hidden = false;//tomato
+					userColor[5].hidden = false;//steelblue
+					userColor[6].hidden = false;//dim grey
+					userColor[4].selected = true;
+			 }
 		 }
 	 });
 
@@ -132,8 +118,8 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 			//selected Activities
 			//1=3,2=4 match, user cannot select both.
-			const jsframeworks = document.querySelector("label[for='jsframeworks'");
-			const jslibs = document.querySelector("label[for='jslibs'");
+			const jsframeworks = document.querySelector("label[for='js-frameworks'");
+			const jslibs = document.querySelector("label[for='js-libs'");
 			const express = document.querySelector("label[for='express'");
 			const node = document.querySelector("label[for='node'");
 
@@ -154,40 +140,43 @@ document.addEventListener('DOMContentLoaded', () =>{
 					 }
 				 for(let i=0; i<checkboxes.length; i++){
 					 let themAttr = checkboxes[i].getAttribute('data-day-and-time');//for each
-					 let themLabel = checkboxes[i].getAttribute('name');
 					 let matchingNode = checkboxes[i].getAttribute('name');
 					 if(clickedType === themAttr && clicked !== checkboxes[i]){//same date and time & NOT the clicked element
 						 if(clicked.checked){
 							 checkboxes[i].disabled = true;//dim the matching checkbox;
 							 if(matchingNode === checkboxes[i].name){//gray the matching
-								 if(matchingNode === "express"){
-									  express.style.color = 'gray';
-								 }
-								 if(matchingNode === "jsframeworks"){
-									  jsframeworks.style.color = 'gray';
-								 }
-								 if(matchingNode === "jslibs"){
-									  jslibs.style.color = 'gray';
-								 }
-								 if(matchingNode === "node"){
-									  node.style.color = 'gray';
-								 }
-							 }
-						 }else{
+									switch(matchingNode){
+										case "express":
+											express.style.color = 'gray';
+											break;
+										case "js-frameworks":
+											jsframeworks.style.color = 'gray';
+											break;
+										case "js-libs":
+											jslibs.style.color = 'gray';
+											break;
+										case "node":
+											node.style.color = 'gray';
+											break;
+									}//end switch
+								}//end if
+							}else{//else clicked.checked, clicked is not checked//only one at a time
 							 checkboxes[i].disabled = false;
-							 if(matchingNode === "express"){
-									express.style.color = 'black';
-							 }
-							 if(matchingNode === "jsframeworks"){
-									jsframeworks.style.color = 'black';
-							 }
-							 if(matchingNode === "jslibs"){
-									jslibs.style.color = 'black';
-							 }
-							 if(matchingNode === "node"){
-									node.style.color = 'black';
-							 }
-						 }
+							 switch(matchingNode){
+								 case "express":
+									 express.style.color = 'black';
+									 break;
+								 case "js-frameworks":
+									 jsframeworks.style.color = 'black';
+									 break;
+								 case "js-libs":
+									 jslibs.style.color = 'black';
+									 break;
+								 case "node":
+									 node.style.color = 'black';
+									 break;
+							 }//end switch
+						 }//end else
 					 }
 				 }
 			 })
@@ -221,22 +210,23 @@ document.addEventListener('DOMContentLoaded', () =>{
 	}
 
 		userPayment.addEventListener('click', (e) =>{//listeners
-		if(userPayment.value === 'credit card'){
-			paymentInfoReset();
-			creditCard.style.display = "block";
-		}else if(userPayment.value === 'select method'){
-			paymentInfoReset();
-			resetErrorMsg();
-		}else if(userPayment.value === 'paypal'){
+			if(userPayment.value === 'credit card'){
+				paymentInfoReset();
+				creditCard.style.display = "block";
+			}//end if
 			paymentInfoReset();
 			resetErrorMsg();
-			paypal.style.display = "block";
-		}else if(userPayment.value === 'bitcoin'){
-			paymentInfoReset();
-			resetErrorMsg();
-			bitcoin.style.display = "block";
-		}
-	});
+			switch(userPayment.value){
+				case 'select method':
+					break;
+				case 'paypal':
+					paypal.style.display = "block";
+					break;
+				case 'bitcoin':
+					bitcoin.style.display = "block";
+					break;
+			}//end switch
+	});//end userPayment listener
 
 
 
@@ -313,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 					return true;
 				}else{
 					ttemail2.style.display = "block";
-					//ttemail.style.display = "block";
+					//ttemail.style.display = "block";//ths one is set when the button is clicked.
 					emailError.style.display = 'block';
 					return false;
 				}
@@ -328,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 			}
 //must select at least one activity;
 			function isValidActivities(){
-				if(total>0){
+				if(total>0){//total cost will indicate if user has selected an event.
 					activitiesError.style.display = 'none';
 					return true;
 				}else{
@@ -433,11 +423,11 @@ document.addEventListener('DOMContentLoaded', () =>{
 		 e.preventDefault(userZip);
 		 e.preventDefault(userCvv);
 		 let cntVal = validator();//call to validator
- 		 if(cntVal === 5){
-			  document.getElementById('register').style.display = "block";
+		 if(cntVal === 5){
+				document.getElementById('register').style.display = "block";
 //Make the register button go away.
 				document.querySelector('button').hidden = true;
-		  }
+			}
 	 });
 
 	 userEmail.addEventListener('keyup', (e) =>{
