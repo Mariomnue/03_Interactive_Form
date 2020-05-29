@@ -10,8 +10,6 @@ Enter less than 13 or more than 16 digits and different helper text appears abov
 After a proper email has been entered both messages dissappear.
 
 
- 
-
 
 
 
@@ -29,7 +27,7 @@ User must select a payment option. Bitcoin and Paypal when selected display a te
 Form does not submit when fields are in error.
 
 
-EC
+Extra Credit:
 Color drop down is hidden until design is selected.
 
 Email input data field has real time error message. 
